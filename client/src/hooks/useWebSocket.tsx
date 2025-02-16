@@ -46,6 +46,10 @@ export const WebsocketProvider = ({ children }: TProps) => {
       socket.on('error', (error) => {
         console.log('error', error);
       });
+
+      socket.on('disconnect', (data, err) => {
+        console.log('disconnect', data, err);
+      });
     }
 
     if (!userInfo?.id && socket !== undefined) {

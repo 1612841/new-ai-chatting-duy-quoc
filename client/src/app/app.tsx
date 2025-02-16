@@ -3,6 +3,7 @@ import './tailwind-global.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
+import { WebsocketProvider } from 'hooks';
 
 export function App() {
   return (
@@ -13,14 +14,16 @@ export function App() {
         </div>
       }
     >
-      <ToastContainer />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<AuthWrapper component={<Login />} isLoginPage />} />
-          <Route path="/home" element={<AuthWrapper component={<Home />} />} />
-          <Route path="*" element={<Navigation />} />
-        </Routes>
-      </BrowserRouter>
+      <WebsocketProvider>
+        <ToastContainer />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<AuthWrapper component={<Login />} isLoginPage />} />
+            <Route path="/home" element={<AuthWrapper component={<Home />} />} />
+            <Route path="*" element={<Navigation />} />
+          </Routes>
+        </BrowserRouter>
+      </WebsocketProvider>
     </Suspense>
   );
 }

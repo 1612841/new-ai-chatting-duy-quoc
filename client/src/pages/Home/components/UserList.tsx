@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react';
 import { useHomeStore, useUserStore } from 'store';
 import { User } from './User';
-import { DefaultUser } from 'assets';
+import { DefaultUser, NoUser } from 'assets';
 import { useClickOutside } from '../Home.config';
 import { use } from 'hooks';
-import { getOnlineUser } from 'apis';
+import { getOnlineUser, logout } from 'apis';
 
 export const UserList = () => {
   const setSelectedUser = useHomeStore((state) => state.setSelectedUser);
@@ -18,25 +18,36 @@ export const UserList = () => {
 
   const renderUserList = useMemo(
     () =>
-      (userList || [])
-        .filter((f) => f.id !== userInfo?.id)
-        .map((user) => (
-          <div
-            key={user.id}
-            className="px-3 py-2 flex items-center bg-white rounded-lg cursor-pointer gap-3 hover:bg-gray-200 transition-all ease-in-out duration-200"
-            onClick={() => setSelectedUser(user)}
-          >
-            <User {...user} />
-          </div>
-        )),
+      !userList || userList.length === 1 ? (
+        <div className="p-4 flex flex-col gap-1 items-center">
+          <img className="w-10 h-10 mb-6 rounded-full" src={NoUser} alt="no-user-logo" />
+          <p className="text-lg opacity-30">No user</p>
+        </div>
+      ) : (
+        userList
+          .filter((f) => f.id !== userInfo?.id)
+          .map((user) => (
+            <div
+              key={user.id}
+              className="px-3 py-2 flex items-center bg-white rounded-lg cursor-pointer gap-3 hover:bg-gray-200 transition-all ease-in-out duration-200"
+              onClick={() => setSelectedUser(user)}
+            >
+              <User {...user} />
+            </div>
+          ))
+      ),
     [userList],
   );
 
   const handleCloseUserPopup = () => setOpenUserPopup(false);
 
-  const handleLogout = () => {
-    resetUserStore();
-    handleCloseUserPopup();
+  const handleLogout = async () => {
+    const res = await logout({ userId: userInfo?.id || '' });
+
+    if (res) {
+      resetUserStore();
+      handleCloseUserPopup();
+    }
   };
 
   const { dropdownRef, mainButtonRef } = useClickOutside(handleCloseUserPopup);
