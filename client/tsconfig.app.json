@@ -13,7 +13,18 @@
     ],
     "rootDir": "src",
     "module": "esnext",
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "baseUrl": "src",
+    "paths": {
+      "@pages": ["pages"],
+      "assets": ["assets"],
+      "types": ["types"],
+      "store": ["store"],
+      "constants/*": ["constants/*"],
+      "utils": ["utils"],
+      "apis": ["apis"],
+      "hooks": ["hooks"]
+    }
   },
   "exclude": [
     "out-tsc",
@@ -26,7 +37,7 @@
     "src/**/*.test.js",
     "src/**/*.spec.jsx",
     "src/**/*.test.jsx",
-    "eslint.config.js",
+    "eslint.config.mjs",
     "eslint.config.cjs",
     "eslint.config.mjs"
   ],
