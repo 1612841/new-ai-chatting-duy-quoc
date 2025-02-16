@@ -24,7 +24,10 @@ export const WebsocketProvider = ({ children }: TProps) => {
   let socket: Socket;
 
   const sendMessage = (receiverId: any, receiver: string, message: string) => {
-    socket.emit('message:send', { receiver: { id: receiverId, username: receiver }, message });
+    socket.emit('message:send', {
+      receiver: { id: receiverId, username: receiver },
+      message,
+    });
   };
 
   useEffect(() => {

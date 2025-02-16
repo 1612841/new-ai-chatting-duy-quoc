@@ -20,7 +20,11 @@ export const UserList = () => {
     () =>
       !userList || userList.length === 1 ? (
         <div className="p-4 flex flex-col gap-1 items-center">
-          <img className="w-10 h-10 mb-6 rounded-full" src={NoUser} alt="no-user-logo" />
+          <img
+            className="w-10 h-10 mb-6 rounded-full"
+            src={NoUser}
+            alt="no-user-logo"
+          />
           <p className="text-lg opacity-30">No user</p>
         </div>
       ) : (
@@ -36,7 +40,7 @@ export const UserList = () => {
             </div>
           ))
       ),
-    [userList],
+    [userList]
   );
 
   const handleCloseUserPopup = () => setOpenUserPopup(false);
