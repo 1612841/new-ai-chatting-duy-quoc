@@ -36,8 +36,12 @@ class HttpServices {
         throw errorMessage || 'Failed to post data';
       }
       const data = await response.json();
+      if (data.message) {
+        toast.success(data.message);
+      } else {
+        toast.success('Success!')
+      }
 
-      toast.success('Success!');
       return data;
     } catch (err) {
       toast.error(err as string);
