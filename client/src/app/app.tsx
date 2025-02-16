@@ -18,8 +18,14 @@ export function App() {
         <ToastContainer />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<AuthWrapper component={<Login />} isLoginPage />} />
-            <Route path="/home" element={<AuthWrapper component={<Home />} />} />
+            <Route
+              path="/"
+              element={<AuthWrapper component={<Login />} isLoginPage />}
+            />
+            <Route
+              path="/home"
+              element={<AuthWrapper component={<Home />} />}
+            />
             <Route path="*" element={<Navigation />} />
           </Routes>
         </BrowserRouter>
