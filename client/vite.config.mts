@@ -6,6 +6,17 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   root: __dirname,
+  build: {
+      outDir: 'dist',
+      rollupOptions: {
+        output: { format: 'es' },
+      },
+      commonjsOptions: {
+        include: [/node_modules/],
+        transformMixedEsModules: true,
+      },
+      minify: 'esbuild',
+    },
   cacheDir: '../node_modules/.vite/client',
   server: {
     port: 4200,
