@@ -4,6 +4,6 @@
   "private": true,
 
   "scripts": {
-    "build": "nx build client"
+    "build": "vite build"
   }
 }
