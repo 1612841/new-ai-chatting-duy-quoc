@@ -1,14 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/node",
-      "config": {
-        "buildCommand": "pnpm run build"
-      }
-    }
-  ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/server/dist/main.js" },
     { "src": "/(.*)", "dest": "/client/$1" }
