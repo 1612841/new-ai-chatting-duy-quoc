@@ -2,19 +2,21 @@ import { useMemo, useState } from 'react';
 import { useHomeStore, useUserStore } from 'store';
 import { User } from './User';
 import { DefaultUser, NoUser } from 'assets';
-import { useClickOutside } from '../Home.config';
-import { use } from 'hooks';
-import { getOnlineUser, logout } from 'apis';
+import { useClickOutside } from 'hooks';
+import { logout } from 'apis';
 
 export const UserList = () => {
-  const setSelectedUser = useHomeStore((state) => state.setSelectedUser);
-  const resetUserStore = useUserStore((state) => state.reset);
-  const userInfo = useUserStore((state) => state.userInfo);
+  const [userList, setSelectedUser, resetHomeStore] = useHomeStore((state) => [
+    state.userList,
+    state.setSelectedUser,
+    state.reset,
+  ]);
+  const [userInfo, resetUserStore] = useUserStore((state) => [
+    state.userInfo,
+    state.reset,
+  ]);
 
   const [openUserPopup, setOpenUserPopup] = useState(false);
-
-  /* Apis */
-  const userList = use(getOnlineUser, true);
 
   const renderUserList = useMemo(
     () =>
@@ -50,6 +52,7 @@ export const UserList = () => {
 
     if (res) {
       resetUserStore();
+      resetHomeStore();
       handleCloseUserPopup();
     }
   };
@@ -57,8 +60,8 @@ export const UserList = () => {
   const { dropdownRef, mainButtonRef } = useClickOutside(handleCloseUserPopup);
 
   return (
-    <div className="flex-1">
-      <div className="pr-4 mb-4 flex justify-between relative">
+    <div className="flex-1 z-0">
+      <div className="lg:pr-4 mb-4 flex justify-between relative ">
         <h1 className="font-bold text-xl text-center leading-10">Chats</h1>
 
         <img
@@ -85,7 +88,7 @@ export const UserList = () => {
         </div>
       </div>
 
-      <div className="pr-4 flex flex-col flex-1 gap-4 max-h-[calc(100%-2.75rem)] overflow-y-auto">
+      <div className="lg:pr-4 flex flex-col flex-1 gap-4 max-h-[calc(100%-2.75rem)] overflow-y-auto">
         {renderUserList}
       </div>
     </div>

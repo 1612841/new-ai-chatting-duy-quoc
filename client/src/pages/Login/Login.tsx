@@ -1,46 +1,31 @@
 import { animated } from '@react-spring/web';
 import { useMouseSpring } from './Login.config';
-import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { useUserStore } from 'store';
-import { getOnlineUser, login } from 'apis';
-import { use } from 'hooks';
 
 export const Login = () => {
   const animatedProps = useMouseSpring();
-  const setUserInfo = useUserStore((state) => state.setUserInfo);
+  const setUserName = useUserStore((state) => state.setUserName);
 
   const [name, setName] = useState<string>();
-  const [isGetOnlineUser, setIsGetOnlineUser] = useState(false);
-
-  /*Apis */
-  const userList = use(getOnlineUser, isGetOnlineUser);
 
   const handleLogin = async () => {
     if (!name) return setName('');
-
-    const loginData = await login({ username: name });
-    if (loginData) return setUserInfo(loginData);
-    if (loginData === null) return setIsGetOnlineUser(true);
+    setUserName(name);
   };
 
   const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
 
-  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && handleLogin();
-
-  useEffect(() => {
-    if (userList) {
-      const oldUser = userList.find((f) => f.username === name);
-
-      if (oldUser) {
-        setUserInfo(oldUser);
-      }
-    }
-  }, [userList]);
+  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) =>
+    e.key === 'Enter' && handleLogin();
 
   return (
-    <animated.div {...animatedProps} className="w-screen h-screen flex justify-center">
+    <animated.div
+      {...animatedProps}
+      className="w-screen h-screen flex justify-center"
+    >
       <div className="w-80 flex flex-col justify-center items-center gap-6">
         <input
           className={`w-full p-3 text-xl border rounded-lg shadow-md outline-none focus:bg-sky-100 focus:border-sky-200 ${
@@ -50,7 +35,7 @@ export const Login = () => {
           placeholder="Your name..."
           value={name}
           onChange={handleChangeName}
-          onKeyDown={handleEnter}
+          onKeyUp={handleEnter}
         />
 
         <button

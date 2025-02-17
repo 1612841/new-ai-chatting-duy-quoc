@@ -1,7 +1,7 @@
 import {
   TGetChatHistoryDto,
   TGetChatHistoryPayload,
-  TGetUserOnlineDto,
+  TGetOnlineUserDto,
   TLoginDto,
   TLoginPayload,
   TLogoutDto,
@@ -28,7 +28,7 @@ const getChatHistory = async ({ userId, receiverId }: TGetChatHistoryPayload) =>
 
 const getOnlineUser = async () => {
   const uri = REST_API.GET_ONLINE_USER.uri;
-  return await httpServices.get<Array<TGetUserOnlineDto>>(uri);
+  return await httpServices.get<Array<TGetOnlineUserDto>>(uri);
 };
 
 export { login, logout, getChatHistory, getOnlineUser };
