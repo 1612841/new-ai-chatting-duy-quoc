@@ -12,12 +12,12 @@
       "src": "server/package.json",
       "use": "@vercel/node",
       "config": {
-        "zeroConfig": false
+        "distDir": "dist"
       }
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/server/main.js" },
+    { "src": "/api/(.*)", "dest": "/server/dist/main.js" },
     { "src": "/(.*)", "dest": "/client/$1" }
   ]
 }
