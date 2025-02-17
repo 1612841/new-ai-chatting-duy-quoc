@@ -21,10 +21,3 @@ export const useMouseSpring = () => {
     onMouseMove: handleMouseMove,
   };
 };
-
-export const action = (cb?: () => void) => (currenState: { userName?: string }) => {
-  console.log(currenState, 'dq');
-  cb?.();
-
-  return currenState;
-};

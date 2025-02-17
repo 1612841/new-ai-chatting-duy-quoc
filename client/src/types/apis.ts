@@ -21,9 +21,9 @@ export type TLogoutDto = {
 };
 
 export type TGetChatHistoryPayload = {
-  userId: string
-  receiverId: string
-}
+  userId: string;
+  receiverId: string;
+};
 
 export type TGetChatHistoryDto = {
   id: string;
@@ -39,4 +39,22 @@ export type TGetChatHistoryDto = {
   timestamp: number;
 };
 
-export type TGetUserOnlineDto = TLoginDto;
+export type TGetOnlineUserDto = TLoginDto;
+
+export type TSocketOnlineUser = {
+  event: string;
+  data: TGetOnlineUserDto[];
+};
+
+export type TSocketSendMessage = {
+  receiver: {
+    id: string;
+    username: string;
+  };
+  message: string;
+};
+
+export type TSocketReceiveMessage = {
+  event: string;
+  data: TGetChatHistoryDto;
+};

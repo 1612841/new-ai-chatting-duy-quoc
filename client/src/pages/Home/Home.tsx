@@ -8,10 +8,10 @@ export const Home = () => {
   const selectedUser = useHomeStore((state) => state.selectedUser);
 
   return (
-    <div className="h-screen px-32 py-16 bg-[#e7ebf7]">
+    <div className="h-screen sm:px-16 sm:py-8 bg-[#e7ebf7]">
       <div
-        className={`h-full px-12 py-10 flex bg-[#f4f8fb] rounded-3xl shadow-lg gap-4 transition-all ease-in-out duration-300 ${
-          !selectedUser ? 'w-1/2' : 'w-full'
+        className={`w-full h-full p-4 md:p-4 lg:p-10 flex flex-col md:flex-row bg-[#f4f8fb] rounded-3xl shadow-lg gap-3 md:gap-4 transition-all ease-in-out duration-300 relative ${
+          !selectedUser ? 'md:w-1/2' : ''
         }`}
       >
         <UserList />
