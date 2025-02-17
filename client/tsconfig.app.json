@@ -21,7 +21,6 @@
       "types": ["types"],
       "store": ["store"],
       "constants/*": ["constants/*"],
-      "utils": ["utils"],
       "apis": ["apis"],
       "hooks": ["hooks"]
     }
