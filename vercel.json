@@ -12,7 +12,7 @@
       "src": "server/package.json",
       "use": "@vercel/node",
       "config": {
-        "distDir": "dist"
+        "buildCommand": "pnpm nx run server:build --configuration=production"
       }
     }
   ],
