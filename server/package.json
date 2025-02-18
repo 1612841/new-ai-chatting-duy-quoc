@@ -2,23 +2,11 @@
   "name": "@nx-chat-assignment/server",
   "version": "0.0.1",
   "private": true,
-  "scripts": {
-    "build": "webpack --config webpack.config.js",
-    "start": "node dist/server/main.js"
-  },
   "nx": {
     "name": "server",
     "projectType": "application",
     "sourceRoot": "server/src",
     "targets": {
-      "build": {
-        "executor": "@nx/js:node",
-        "options": {
-          "outputPath": "dist/server",
-          "main": "server/src/main.ts", 
-          "tsConfig": "server/tsconfig.app.json"
-        }
-      },
       "serve": {
         "executor": "@nx/js:node",
         "defaultConfiguration": "development",
