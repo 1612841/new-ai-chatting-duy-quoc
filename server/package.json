@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "nx build server",
+    "build": "webpack --config webpack.config.js",
     "start": "node dist/server/main.js"
   },
   "nx": {
